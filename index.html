@@ -1,176 +1,520 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bleu Carbone — Tattoo & Piercing à Vienne</title>
-  <meta name="description" content="Studio de tatouage et piercing à Vienne. Qualité, hygiène irréprochable, bijoux premium. Prenez rendez-vous chez Bleu Carbone." />
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bleu Carbone - Tatouage & Piercing à Vienne</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            transition: opacity 0.5s ease;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 4px 20px rgba(0, 200, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00c8ff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00c8ff; }
+            to { text-shadow: 0 0 25px #0066ff; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00c8ff, #0066ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: #00c8ff;
+            transition: all 0.3s ease;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1601076604324-42b9c629fd02?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00c8ff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #aaa;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .cta-button, .cta-button-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #00c8ff, #0066ff);
+            color: #fff;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 200, 255, 0.4);
+        }
+
+        .cta-button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid #00c8ff;
+            color: #00c8ff;
+        }
+        .cta-button-secondary:hover {
+            background: rgba(0, 200, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 200, 255, 0.3);
+        }
+
+        .services {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #00c8ff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: #00c8ff;
+            box-shadow: 0 15px 40px rgba(0, 200, 255, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #00c8ff;
+        }
+
+        .service-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .gallery {
+            padding: 6rem 5%;
+            background: #050505;
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 15px 40px rgba(0, 200, 255, 0.3);
+        }
+
+        footer {
+            background: #050505;
+            padding: 2rem 5%;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #111;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .burger { display: flex; }
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: rgba(10, 10, 10, 0.98);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.45s cubic-bezier(.22,.9,.32,1);
+                gap: 1.2rem;
+                z-index: 1100;
+            }
+            .nav-links.active { right: 0; }
+
+            .nav-links li {
+                list-style: none;
+                opacity: 0;
+                transform: translateX(30px);
+                transition: transform 0.45s cubic-bezier(.22,.9,.32,1), opacity 0.35s ease;
+            }
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .cta-button, .cta-button-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .map-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner container">
-      <div class="brand"><div class="logo">BC</div> Bleu Carbone</div>
-      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
-      <nav id="mainNav">
-        <a href="#services">Services</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#hygiene">Hygiène</a>
-        <a href="#infos">Infos</a>
-        <a href="#contact" class="pill">Prendre rendez-vous</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero container">
-      <span class="badge">Tattoo & Piercing — Vienne</span>
-      <h1>Bleu Carbone</h1>
-      <p>Studio de tatouage et piercing à Vienne. Accompagnement sur mesure, hygiène stricte, bijoux de qualité.</p>
-      <div class="hero-cta">
-        <a class="btn" href="tel:+33628323513">📞 Appeler</a>
-        <a class="btn secondary" href="#contact">📩 Demander un rendez-vous</a>
-      </div>
-    </section>
-
-    <section id="services" class="section container">
-      <h2>Services</h2>
-      <p class="muted">Tatouage personnalisé, recouvrement, perçage toutes zones, changement et pose de bijoux, conseils cicatrisation.</p>
-      <div class="services-grid" style="margin-top:14px">
-        <div class="card"><h3>Tatouage</h3><p class="muted">Flashs et projets sur mesure. Styles: fineline, blackwork, floral, réaliste.</p></div>
-        <div class="card"><h3>Piercing</h3><p class="muted">Lobe, hélix, conch, tragus, septum, nostril, nombril, surface. Bijoux titane / or 14k.</p></div>
-        <div class="card"><h3>Conseils & Aftercare</h3><p class="muted">Brief avant séance, protocole de soins, contrôle de cicatrisation, changement de bijoux.</p></div>
-      </div>
-    </section>
-
-    <section id="galerie" class="section container">
-      <h2>Galerie</h2>
-      <p class="muted">Exemples et résultats de nos Flash, Tattoo et Piercing.</p>
-      <div class="gallery" style="margin-top:14px">
-        <img src="pic-1.png" alt="Tatouage buste avec portraits et tigre" loading="lazy">
-        <img src="pic-2.png" alt="Tatouage portrait style mythologique" loading="lazy">
-        <img src="pic-3.png" alt="Tatouage papillon noir et fineline" loading="lazy">
-        <img src="pic-4.png" alt="Piercing oreille bijou chaîne dorée" loading="lazy">
-        <img src="pic-5.png" alt="Bijoux Junipurr or et pierres" loading="lazy">
-        <img src="pic-6.png" alt="Piercing oreille multiples bijoux" loading="lazy">
-        <img src="pic-7.png" alt="Tatouage oiseau coloré" loading="lazy">
-        <img src="pic-8.png" alt="Tatouage arbre noir et gris sur bras" loading="lazy">
-        <img src="pic-9.png" alt="Tatouage vautour et fleur" loading="lazy">
-      </div>
-    </section>
-
-    <section id="hygiene" class="section container">
-      <h2>Hygiène & qualité</h2>
-      <div class="card" style="margin-top:10px">
-        <ul class="muted" style="margin:0;padding-left:18px;line-height:1.6">
-          <li>Matériel stérile à usage unique (aiguilles, tips, gants). Autoclave contrôlé.</li>
-          <li>Zones de travail désinfectées entre chaque client. Films barrières et champs stériles.</li>
-          <li>Bijoux certifiés: titane implantable ASTM F-136, or 14k/18k, filetage interne.</li>
-          <li>Consentement éclairé, vérification identité/âge, contre-indications passées en revue.</li>
-          <li>Protocole aftercare remis par écrit avec consignes claires et numéros utiles.</li>
-        </ul>
-      </div>
-      <div class="services-grid" style="margin-top:14px">
-        <div class="card"><h3>Contrôle & suivi</h3><p class="muted">Visite de contrôle gratuite. Ajustement de bijoux. Photos de cicatrisation sur demande.</p></div>
-        <div class="card"><h3>Traçabilité</h3><p class="muted">Lots enregistrés. Datamatrix conservés. Registre d’Hygiène à jour.</p></div>
-        <div class="card"><h3>Qualité client</h3><p class="muted">Brief projet, devis clair, temps de réflexion, respect du confort et de la pudeur.</p></div>
-      </div>
-    </section>
-
-    <section id="infos" class="section container">
-      <h2>Infos pratiques</h2>
-      <div class="services-grid" style="margin-top:10px">
-        <div class="card">
-          <h3>Adresse & accès</h3>
-          <p>12 Place du Palais Charles de Gaulle<br>38200 Vienne, France</p>
-          <p class="muted">Parking à proximité. Transports en commun vers centre-ville.</p>
+    <nav id="navbar">
+        <div class="nav-content">
+            <div class="logo">BLEU CARBONE</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#accueil" class="active">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+            </ul>
+            <div class="burger" id="burger" aria-label="Ouvrir le menu" role="button" tabindex="0">
+                <span></span><span></span><span></span>
+            </div>
         </div>
-        <div class="card">
-          <h3>Horaires</h3>
-          <p>Mardi – Samedi : 11:00–19:00<br>Dimanche & Lundi : Fermé</p>
-          <p class="muted">Passez avant 18:30 pour les piercings sans rendez-vous.</p>
+    </nav>
+
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1>BLEU CARBONE</h1>
+            <p>Tatouage & Piercing d'Exception à Vienne</p>
+            <div class="cta-buttons">
+                <a href="tel:0628323513" class="cta-button"><span>📞</span> Appeler</a>
+                <a href="sms:0628323513" class="cta-button-secondary"><span>💬</span> SMS</a>
+            </div>
         </div>
-        <div class="card">
-          <h3>Contact</h3>
-          <p>📞 <a href="tel:+33628323513">06 28 32 35 13</a><br>📱 <a href="sms:+33628323513">06 28 32 35 13</a><br>Instagram : <a href="https://www.instagram.com/bleucarbone.vienne/" target="_blank" rel="noopener">@bleucarbone.vienne</a></p>
-        </div>
-      </div>
-      <div class="card" style="margin-top:14px">
-        <iframe title="Plan Bleu Carbone" src="https://www.google.com/maps?q=Bleu%20Carbone%2012%20Place%20du%20Palais%20Charles%20de%20Gaulle%2C%2038200%20Vienne&output=embed" width="100%" height="320" style="border:0"></iframe>
-      </div>
     </section>
 
-    <section id="contact" class="section container">
-      <h2>Contact & rendez-vous</h2>
-      <div class="card" style="margin-top:10px">
-        <p class="muted">Copiez/collez ce modèle puis complétez :</p>
-<pre style="white-space:pre-wrap;background:#0e121b;color:#e6e9ef;border:1px solid #2a3147;border-radius:12px;padding:12px">Nom : 
-Prénom : 
-Téléphone : 
-Email : 
-Type de demande : [Tatouage / Piercing / Bijou]
-Description du projet : 
-Disponibilités : </pre>
-        <p>Collez votre modèle dans un message ou écrivez-nous sur Instagram.</p>
-        <p><a class="btn secondary" href="https://www.instagram.com/bleucarbone.vienne/" target="_blank" rel="noopener">DM Instagram</a></p>
-      </div>
+    <section class="services" id="services">
+        <h2 class="section-title fade-in">Nos Services</h2>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">✒️</div>
+                <h3>Tatouage</h3>
+                <p>Des créations uniques et personnalisées réalisées par des artistes passionnés. Du petit motif délicat aux grandes pièces complexes.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">💎</div>
+                <h3>Piercing</h3>
+                <p>Piercings réalisés dans le respect des normes d'hygiène les plus strictes. Large sélection de bijoux de qualité.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🛡️</div>
+                <h3>Hygiène</h3>
+                <p>Matériel stérile, autoclave classe B, gants stériles, espace dédié — votre sécurité est notre priorité.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🎨</div>
+                <h3>Design personnalisé</h3>
+                <p>Consultation gratuite pour concevoir un tatouage qui vous ressemble.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" aria-hidden="true">
-      <div class="lightbox-inner">
-        <button class="lb-close" id="lbClose" aria-label="Fermer">✕</button>
-        <button class="lb-prev" id="lbPrev" aria-label="Précédent">◀</button>
-        <img id="lbImg" alt="Aperçu">
-        <button class="lb-next" id="lbNext" aria-label="Suivant">▶</button>
-      </div>
-    </div>
-  </main>
+    <section class="contact" id="contact">
+        <h2 class="section-title fade-in">Contact & Localisation</h2>
+        <div style="text-align:center; margin-bottom:2rem;" class="fade-in">
+            <p>📍 Vienne, France</p>
+            <p>📞 06 28 32 35 13</p>
+            <p>📅 Sur rendez-vous uniquement</p>
+            <div class="cta-buttons" style="margin-top:2rem;">
+                <a href="tel:0628323513" class="cta-button">Appeler maintenant</a>
+                <a href="sms:0628323513" class="cta-button-secondary">Envoyer un SMS</a>
+            </div>
+        </div>
+        <div class="map-container fade-in" style="max-width:800px;margin:0 auto;border-radius:20px;overflow:hidden;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.4847938724366!2d4.871472315559389!3d45.52533537910142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4dfa7e0df5f91%3A0x5ceee33645e57505!2sBleu%20Carbone!5e0!3m2!1sfr!2sfr!4v1697000000000!5m2!1sfr!2sfr" allowfullscreen loading="lazy" style="width:100%;height:400px;border:none;filter:grayscale(100%) invert(92%) contrast(83%);"></iframe>
+        </div>
+    </section>
 
-  <footer class="footer container">
-    <div class="list">
-      <p>© <span id="y"></span> Bleu Carbone. Tous droits réservés.</p>
-      <p><a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a></p>
-    </div>
-  </footer>
+    <section class="gallery" id="galerie">
+        <h2 class="section-title fade-in">Galerie</h2>
+        <div class="gallery-grid">
+            <a href="" class="glightbox gallery-item fade-in">
+                <img src="" alt="Tatouage 1">
+            </a>
+            <a href="" class="glightbox gallery-item fade-in">
+                <img src="" alt="Tatouage 2">
+            </a>
+            <a href="" class="glightbox gallery-item fade-in">
+                <img src="" alt="Tatouage 3">
+            </a>
+            <a href="" class="glightbox gallery-item fade-in">
+                <img src="" alt="Tatouage 4">
+            </a>
+            <a href="" class="glightbox gallery-item fade-in">
+                <img src="" alt="Tatouage 5">
+            </a>
+            <a href="" class="glightbox gallery-item fade-in">
+                <img src="" alt="Tatouage 6">
+            </a>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://www.instagram.com/bleucarbone.vienne/" target="_blank" class="cta-button">Voir plus sur Instagram</a>
+        </div>
+    </section>
 
-  <!-- JS: menu mobile + lightbox -->
-  <script>
-    // Menu mobile
-    (function(){
-      const toggle=document.getElementById('menuToggle');
-      const nav=document.getElementById('mainNav');
-      if(toggle && nav){
-        toggle.addEventListener('click',()=>nav.classList.toggle('open'));
-        nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-      }
-    })();
+    <footer>
+        <p>&copy; 2025 Bleu Carbone - Tous droits réservés</p>
+    </footer>
 
-    // Lightbox
-    (function(){
-      const gallery = Array.from(document.querySelectorAll('#galerie .gallery img'));
-      const lb = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lbImg');
-      const btnClose = document.getElementById('lbClose');
-      const btnPrev = document.getElementById('lbPrev');
-      const btnNext = document.getElementById('lbNext');
-      let index = 0;
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        const navbar = document.getElementById('navbar');
+        const sections = document.querySelectorAll('section');
+        const navAnchors = document.querySelectorAll('.nav-links a');
 
-      function open(i){ index=i; lbImg.src = gallery[index].src; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); }
-      function close(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src=''; }
-      function prev(){ index = (index-1+gallery.length)%gallery.length; lbImg.src = gallery[index].src; }
-      function next(){ index = (index+1)%gallery.length; lbImg.src = gallery[index].src; }
+        function onScrollHandler() {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
 
-      gallery.forEach((img,i)=>{ img.style.cursor='zoom-in'; img.addEventListener('click',()=>open(i)); });
-      btnClose.addEventListener('click',close);
-      btnPrev.addEventListener('click',prev);
-      btnNext.addEventListener('click',next);
-      lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
-      window.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
-    })();
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 160;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navAnchors.forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', onScrollHandler);
+        window.addEventListener('resize', onScrollHandler);
+        onScrollHandler();
 
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+        const navItems = document.querySelectorAll('.nav-links li');
+
+        function toggleMobileMenu() {
+            navLinks.classList.toggle('active');
+            navItems.forEach((item, index) => {
+                if (navLinks.classList.contains('active')) {
+                    item.style.transitionDelay = `${index * 0.08}s`;
+                } else {
+                    item.style.transitionDelay = '0s';
+                }
+            });
+        }
+
+        burger.addEventListener('click', toggleMobileMenu);
+        burger.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') toggleMobileMenu(); });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.classList.remove('active');
+                navItems.forEach(item => item.style.transitionDelay = '0s');
+            });
+        });
+
+        const lightbox = GLightbox({ selector: '.glightbox' });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                navItems.forEach(item => item.style.transitionDelay = '0s');
+            }
+        });
+    </script>
 </body>
 </html>
-
